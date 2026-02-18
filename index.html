@@ -369,6 +369,16 @@
       alert('Thank you! Your report has been submitted for review.');
       document.getElementById('report-text').value = '';
     }
+    // Referral tracking
+    (function(){
+      const p = new URLSearchParams(location.search);
+      const ref = p.get('ref') || p.get('r');
+      if (ref && /^[a-zA-Z0-9]{3,64}$/.test(ref)) {
+        if (!localStorage.getItem('scam_ref')) localStorage.setItem('scam_ref', ref);
+        if (typeof gtag === 'function') gtag('event', 'referral_visit', { referral_code: ref, source: 'scam_surf' });
+        history.replaceState({}, '', location.pathname);
+      }
+    })();
   </script>
 </body>
 </html>
