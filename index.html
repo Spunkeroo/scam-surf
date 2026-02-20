@@ -10,9 +10,11 @@
   <meta property="og:description" content="Exposing surf industry scams, fake gear, and fraudulent schools.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://scam.surf">
+  <meta property="og:image" content="https://scam.surf/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://scam.surf/og-image.png">
   <link rel="canonical" href="https://scam.surf">
-  <meta name="twitter:site" content="scam.surf">
+  <meta name="twitter:site" content="@SpunkArt13">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDAgNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIwIDMgTDM2IDE0IEwzNiAyNCBDMzYgMzIgMjggMzggMjAgNDAgQzEyIDM4IDQgMzIgNCAyNCBMNCAxNCBaIiBmaWxsPSIjZWY0NDQ0Ii8+PHJlY3QgeD0iMTgiIHk9IjEyIiB3aWR0aD0iNCIgaGVpZ2h0PSIxNCIgcng9IjIiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iMjAiIGN5PSIzMSIgcj0iMi41IiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==">
   <style>
@@ -82,6 +84,13 @@
 
     .no-results{text-align:center;padding:3rem;color:var(--dim);}
 
+    .tip-btn{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;border:none;padding:0.45rem 1.1rem;border-radius:999px;font-weight:800;font-size:0.82rem;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;box-shadow:0 0 12px rgba(239,68,68,0.4);transition:all .2s;white-space:nowrap}
+    .tip-btn:hover{box-shadow:0 0 20px rgba(239,68,68,0.7);transform:scale(1.05)}
+    .tip-icon{display:inline-block;animation:tipPulse 2s infinite}
+    @keyframes tipPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+    .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:10000;opacity:0;pointer-events:none;transition:opacity .3s}
+    .modal-overlay.active{opacity:1;pointer-events:all}
+
     @media(max-width:600px){
       .hero h1{font-size:1.8rem;}
       .hero-stats{gap:1rem;}
@@ -90,6 +99,7 @@
   </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GVNL11PEGP"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GVNL11PEGP');</script>
+  <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","pn0x1z2y3w");</script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   <script>
@@ -122,6 +132,7 @@
       <div class="hero-stat"><span class="num">5</span><span class="label">Categories</span></div>
       <div class="hero-stat"><span class="num" id="vote-count">0</span><span class="label">Community Votes</span></div>
     </div>
+    <div style="margin-top:1.2rem;"><a href="#" class="tip-btn" onclick="event.preventDefault();document.getElementById('tipModal').classList.add('active');document.body.style.overflow='hidden'"><span class="tip-icon">🧡</span> Tip</a></div>
   </div>
 
   <div class="toolbar">
@@ -309,6 +320,8 @@
       <a href="https://spunkart.com" target="_blank" rel="noopener noreferrer" style="background:transparent;color:#fff;border:1px solid #555;">SpunkArt.com</a>
       <a href="https://stimulant.wiki" target="_blank" rel="noopener noreferrer">Stimulant Wiki</a>
       <a href="https://stimulant.shop" target="_blank" rel="noopener noreferrer">Stimulant Shop</a>
+      <a href="https://aliens.today" target="_blank" rel="noopener noreferrer" style="background:transparent;color:#fff;border:1px solid #555;">Aliens Network</a>
+      <a href="https://sell.party" target="_blank" rel="noopener noreferrer" style="background:#f59e0b;color:#000;">Sell Party</a>
     </div>
     <p class="promo-note">Free daily SPUNK runes + ordinal prizes on spunk.bet</p>
   </div>
@@ -331,6 +344,8 @@
         <a href="https://spunk.bet" target="_blank" rel="noopener noreferrer">Spunk.Bet Casino</a>
         <a href="https://predict.pics" target="_blank" rel="noopener noreferrer">Predict Network</a>
         <a href="https://monkey.directory" target="_blank" rel="noopener noreferrer">Monkey Network</a>
+        <a href="https://aliens.today" target="_blank" rel="noopener noreferrer">Alien Network</a>
+        <a href="https://sell.party" target="_blank" rel="noopener noreferrer">Sell Party</a>
         <a href="mailto:contact@scam.surf">contact@scam.surf</a>
       </div>
     </div>
@@ -349,8 +364,28 @@
     <div class="footer-bottom">
       <p>&copy; 2026 scam.surf — Independent research project. Not financial or legal advice. Always DYOR.</p>
       <p style="margin-top:6px;"><a href="/privacy.html" style="color:var(--dim);">Privacy Policy & Terms</a></p>
+      <p style="margin-top:10px;"><a href="#" class="tip-btn" onclick="event.preventDefault();document.getElementById('tipModal').classList.add('active');document.body.style.overflow='hidden'" style="font-size:0.75rem;padding:0.35rem 0.9rem"><span class="tip-icon">🧡</span> Support Us</a></p>
     </div>
   </footer>
+
+  <div class="modal-overlay" id="tipModal" onclick="if(event.target===this){this.classList.remove('active');document.body.style.overflow=''}">
+  <div style="background:#0e0e16;border:1px solid #1a1a28;border-radius:16px;padding:28px 24px;max-width:420px;width:90%;max-height:85vh;overflow-y:auto;position:relative">
+  <button onclick="document.getElementById('tipModal').classList.remove('active');document.body.style.overflow=''" style="position:absolute;top:12px;right:16px;background:none;border:none;color:#888;font-size:24px;cursor:pointer">&times;</button>
+  <h3 style="text-align:center;font-size:1.2rem;margin-bottom:4px">🧡 Support Our Work</h3>
+  <p style="text-align:center;font-size:0.8rem;color:#888;margin-bottom:20px">Help us keep exposing scams. Tips keep everything free.<br>Powered by <a href="https://spunk.bet" target="_blank" style="color:#ef4444">Spunk.bet</a></p>
+  <div style="font-size:0.7rem;color:#ef4444;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Crypto</div>
+  <div style="margin-bottom:12px"><div style="font-size:0.72rem;color:#f7931a;font-weight:700;margin-bottom:3px">&#8383; Bitcoin (BTC)</div><div onclick="navigator.clipboard.writeText('bc1qr4zcdh9wz26gtn4pqz9c8wmxwalpjut8fxzsfn').then(()=>{this.querySelector('.cp').textContent='Copied!';setTimeout(()=>this.querySelector('.cp').textContent='Copy',2000)})" style="background:#0a0a10;border:1px solid #1a1a28;border-radius:8px;padding:8px 10px;font-size:0.65rem;font-family:monospace;cursor:pointer;display:flex;justify-content:space-between;align-items:center;word-break:break-all;color:#e8e8f0"><span>bc1qr4zcdh9wz26gtn4pqz9c8wmxwalpjut8fxzsfn</span><span class="cp" style="color:#ef4444;font-weight:700;margin-left:8px;white-space:nowrap">Copy</span></div></div>
+  <div style="margin-bottom:12px"><div style="font-size:0.72rem;color:#627eea;font-weight:700;margin-bottom:3px">&#926; Ethereum (ETH)</div><div onclick="navigator.clipboard.writeText('0xD2aC89253b5F20f5b03b5B591297Fa4FCC37d41c').then(()=>{this.querySelector('.cp').textContent='Copied!';setTimeout(()=>this.querySelector('.cp').textContent='Copy',2000)})" style="background:#0a0a10;border:1px solid #1a1a28;border-radius:8px;padding:8px 10px;font-size:0.65rem;font-family:monospace;cursor:pointer;display:flex;justify-content:space-between;align-items:center;word-break:break-all;color:#e8e8f0"><span>0xD2aC89253b5F20f5b03b5B591297Fa4FCC37d41c</span><span class="cp" style="color:#ef4444;font-weight:700;margin-left:8px;white-space:nowrap">Copy</span></div></div>
+  <div style="margin-bottom:16px"><div style="font-size:0.72rem;color:#9945ff;font-weight:700;margin-bottom:3px">&#9678; Solana (SOL)</div><div onclick="navigator.clipboard.writeText('Cds2aUuhyJa4NaZo7JER7LakW4VmmfnqVixHusrKKZsm').then(()=>{this.querySelector('.cp').textContent='Copied!';setTimeout(()=>this.querySelector('.cp').textContent='Copy',2000)})" style="background:#0a0a10;border:1px solid #1a1a28;border-radius:8px;padding:8px 10px;font-size:0.65rem;font-family:monospace;cursor:pointer;display:flex;justify-content:space-between;align-items:center;word-break:break-all;color:#e8e8f0"><span>Cds2aUuhyJa4NaZo7JER7LakW4VmmfnqVixHusrKKZsm</span><span class="cp" style="color:#ef4444;font-weight:700;margin-left:8px;white-space:nowrap">Copy</span></div></div>
+  <div style="font-size:0.7rem;color:#ef4444;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">Fiat &amp; Apps</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
+  <a href="https://paypal.me/SpunkArt13" target="_blank" rel="noopener" style="background:#0070ba;color:#fff;padding:10px;border-radius:8px;text-align:center;text-decoration:none;font-weight:700;font-size:0.8rem">PayPal</a>
+  <a href="https://venmo.com/SpunkArt13" target="_blank" rel="noopener" style="background:#3d95ce;color:#fff;padding:10px;border-radius:8px;text-align:center;text-decoration:none;font-weight:700;font-size:0.8rem">Venmo</a>
+  <a href="https://cash.app/$SpunkArt13" target="_blank" rel="noopener" style="background:#00d632;color:#fff;padding:10px;border-radius:8px;text-align:center;text-decoration:none;font-weight:700;font-size:0.8rem">Cash App</a>
+  <a href="https://ko-fi.com/SpunkArt13" target="_blank" rel="noopener" style="background:#ff5e5b;color:#fff;padding:10px;border-radius:8px;text-align:center;text-decoration:none;font-weight:700;font-size:0.8rem">Ko-fi</a>
+  </div>
+  <p style="text-align:center;font-size:0.7rem;color:#555">Every tip helps us expose more scams &amp; keep everything free. &#128591;</p>
+  </div></div>
 
   <script>
     let activeFilter = 'all';
