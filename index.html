@@ -87,6 +87,10 @@
 
     .no-results{text-align:center;padding:3rem;color:var(--dim);}
 
+    /* Prevent horizontal overflow globally */
+    html,body{overflow-x:hidden;max-width:100vw;}
+    img,iframe,canvas,video{max-width:100%;height:auto;}
+
     .spin-section{max-width:600px;margin:2rem auto;padding:0 1.5rem;}
     .spin-container{text-align:center;position:relative;padding-top:20px;}
     #spinWheel{max-width:320px;margin:0 auto;display:block;filter:drop-shadow(0 0 20px #3b82f630);}
@@ -139,6 +143,10 @@
       .site-footer{padding:1.5rem 1rem;}
       .footer-inner{grid-template-columns:1fr;gap:1.5rem;}
       .footer-bottom{font-size:0.65rem;}
+      .email-section{padding:0 1rem!important;}
+      .share-site-btn{width:100%;padding:0.6rem!important;}
+      .affiliate-links{gap:0.4rem!important;padding:0.75rem 0!important;}
+      .affiliate-links a{font-size:0.65rem!important;padding:0.25rem 0.6rem!important;}
     }
 
     /* Phone */
@@ -178,6 +186,12 @@
       .footer-section h4{font-size:0.7rem;}
       .footer-section a,.footer-section p{font-size:0.75rem;}
       .tip-btn{font-size:0.75rem;padding:0.4rem 0.9rem;}
+      .email-section{padding:0 0.75rem!important;}
+      .email-section div{padding:1rem!important;}
+      .share-site-btn{width:100%;font-size:0.8rem!important;}
+      .affiliate-links{gap:0.3rem!important;}
+      .affiliate-links a{font-size:0.6rem!important;padding:0.2rem 0.5rem!important;}
+      .modal-overlay>div{width:95%!important;padding:20px 16px!important;}
     }
   </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GVNL11PEGP"></script>
@@ -381,7 +395,7 @@
     </div>
   </div>
 
-  <div style="max-width:600px;margin:2rem auto;padding:0 1.5rem;">
+  <div class="email-section" style="max-width:600px;margin:2rem auto;padding:0 1.5rem;">
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;">
       <h3 style="font-size:1.1rem;margin-bottom:0.3rem;">Stay Protected</h3>
       <p style="color:var(--dim);font-size:0.85rem;margin-bottom:1rem;">Get scam alerts and exposure reports delivered to your inbox.</p>
@@ -391,8 +405,8 @@
     </div>
   </div>
 
-  <div style="text-align:center;margin-bottom:2rem;">
-    <button onclick="shareSite()" style="background:none;border:1px solid var(--border);color:var(--dim);padding:0.5rem 1.2rem;border-radius:8px;cursor:pointer;font-size:0.85rem;transition:all 0.2s;">Share scam.surf on 𝕏</button>
+  <div class="share-site-wrap" style="text-align:center;margin-bottom:2rem;">
+    <button class="share-site-btn" onclick="shareSite()" style="background:none;border:1px solid var(--border);color:var(--dim);padding:0.5rem 1.2rem;border-radius:8px;cursor:pointer;font-size:0.85rem;transition:all 0.2s;">Share scam.surf on 𝕏</button>
   </div>
 
   <section class="spin-section" id="spinSection">
@@ -449,7 +463,7 @@
         <a href="mailto:contact@scam.surf">contact@scam.surf</a>
       </div>
     </div>
-    <div style="max-width:900px;margin:1.5rem auto 0;padding:1rem 0;display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem;">
+    <div class="affiliate-links" style="max-width:900px;margin:1.5rem auto 0;padding:1rem 0;display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem;">
       <a href="https://stake.com/?c=MyXSehCn" target="_blank" rel="noopener sponsored" style="font-size:0.7rem;padding:0.3rem 0.8rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--dim);">Stake.com</a>
       <a href="https://stake.us/?c=L2a8nG6c" target="_blank" rel="noopener sponsored" style="font-size:0.7rem;padding:0.3rem 0.8rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--dim);">Stake.us</a>
       <a href="https://shuffle.com?r=q94atl9m05" target="_blank" rel="noopener sponsored" style="font-size:0.7rem;padding:0.3rem 0.8rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--dim);">Shuffle</a>
