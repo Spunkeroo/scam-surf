@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://predict-network-ec767-default-rtdb.firebaseio.com; frame-src 'none'; object-src 'none'; base-uri 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://predict-network-ec767-default-rtdb.firebaseio.com; frame-src https://embeds.beehiiv.com; object-src 'none'; base-uri 'self'">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>scam.surf — Exposing surf industry scams, fake gear, and fraudulent schools.</title>
   <meta name="description" content="Exposing surf industry scams, fake gear, and fraudulent schools.">
@@ -280,6 +280,18 @@
     </div>
   </div>
 
+  <div style="max-width:600px;margin:2rem auto;padding:0 1.5rem;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;">
+      <h3 style="font-size:1.1rem;margin-bottom:0.3rem;">Stay Protected</h3>
+      <p style="color:var(--dim);font-size:0.85rem;margin-bottom:1rem;">Get scam alerts and exposure reports delivered to your inbox.</p>
+      <iframe src="https://embeds.beehiiv.com/6831d05b-f121-4e0d-951b-16f88ddd9ec3?slim=true" data-test-id="beehiiv-embed" height="52" frameborder="0" scrolling="no" style="margin:0;border-radius:0px!important;background-color:transparent;width:100%;max-width:400px;"></iframe>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:2rem;">
+    <button onclick="shareSite()" style="background:none;border:1px solid var(--border);color:var(--dim);padding:0.5rem 1.2rem;border-radius:8px;cursor:pointer;font-size:0.85rem;transition:all 0.2s;">Share scam.surf on 𝕏</button>
+  </div>
+
   <div class="promo-banner">
     <p class="from">From the Creator</p>
     <h3>Contact: <a href="mailto:contact@scam.surf" style="color:#ff5f1f;">contact@scam.surf</a></h3>
@@ -317,7 +329,7 @@
     </div>
     <div style="max-width:900px;margin:1.5rem auto 0;padding:1rem 0;display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem;">
       <a href="https://stake.com/?c=MyXSehCn" target="_blank" rel="noopener sponsored" style="font-size:0.7rem;padding:0.3rem 0.8rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--dim);">Stake.com</a>
-      <a href="https://shuffle.com/?r=q94atl9m05" target="_blank" rel="noopener sponsored" style="font-size:0.7rem;padding:0.3rem 0.8rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--dim);">Shuffle</a>
+      <a href="https://shuffle.com?r=q94atl9m05" target="_blank" rel="noopener sponsored" style="font-size:0.7rem;padding:0.3rem 0.8rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--dim);">Shuffle</a>
       <a href="https://stake.us/?c=L2a8nG6c" target="_blank" rel="noopener sponsored" style="font-size:0.7rem;padding:0.3rem 0.8rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--dim);">Stake.us</a>
       <a href="https://winna.com/?r=Spunkeroo" target="_blank" rel="noopener sponsored" style="font-size:0.7rem;padding:0.3rem 0.8rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--dim);">Winna</a>
       <a href="https://coinbase.com/join/YAGES3X" target="_blank" rel="noopener sponsored" style="font-size:0.7rem;padding:0.3rem 0.8rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--dim);">Coinbase</a>
@@ -370,7 +382,13 @@
     }
 
     function shareScam(name) {
-      const text = '⚠️ SCAM ALERT: ' + name + '\n\nExposed on scam.surf — protecting people from fraud.';
+      const text = '⚠️ SCAM ALERT: ' + name + '\n\nExposed on scam.surf — protecting people from fraud.\n\nvia @SpunkArt13';
+      const url = 'https://scam.surf';
+      window.open('https://x.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank');
+    }
+
+    function shareSite() {
+      const text = '⚠️ scam.surf — Exposing surf industry scams, fake gear, and fraudulent schools.\n\nExposing scams. Protecting people.\n\nvia @SpunkArt13';
       const url = 'https://scam.surf';
       window.open('https://x.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank');
     }
