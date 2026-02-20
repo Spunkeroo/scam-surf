@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://predict-network-ec767-default-rtdb.firebaseio.com; frame-src https://embeds.beehiiv.com; object-src 'none'; base-uri 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://*.firebaseio.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://predict-network-ec767-default-rtdb.firebaseio.com wss://predict-network-ec767-default-rtdb.firebaseio.com; frame-src https://embeds.beehiiv.com; object-src 'none'; base-uri 'self'">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>scam.surf — Exposing surf industry scams, fake gear, and fraudulent schools.</title>
   <meta name="description" content="Exposing surf industry scams, fake gear, and fraudulent schools.">
@@ -90,6 +90,13 @@
   </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GVNL11PEGP"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GVNL11PEGP');</script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <script>
+    firebase.initializeApp({databaseURL:'https://predict-network-ec767-default-rtdb.firebaseio.com'});
+    var db = firebase.database();
+    var SITE_ID = 'surf';
+  </script>
 </head>
 <body>
   <div class="network-bar">
@@ -368,11 +375,12 @@
     }
 
     function vote(btn, dir) {
-      const span = btn.querySelector('span');
-      let v = parseInt(span.textContent) + dir;
-      span.textContent = v;
+      const card = btn.closest('.scam-card');
+      const idx = card.dataset.idx;
+      const key = dir > 0 ? 'up' : 'down';
+      const ref = db.ref('scam/' + SITE_ID + '/votes/' + idx + '/' + key);
+      ref.set(firebase.database.ServerValue.increment(1));
       btn.style.color = dir > 0 ? '#22c55e' : '#ef4444';
-      updateVoteCount();
     }
 
     function updateVoteCount() {
@@ -380,6 +388,25 @@
       document.querySelectorAll('.vote-btn span').forEach(s => total += Math.abs(parseInt(s.textContent)));
       document.getElementById('vote-count').textContent = total;
     }
+
+    // Load votes from Firebase and listen for changes
+    (function(){
+      db.ref('scam/' + SITE_ID + '/votes').on('value', function(snap) {
+        const data = snap.val() || {};
+        let total = 0;
+        cards.forEach(function(card) {
+          const idx = card.dataset.idx;
+          const votes = data[idx] || {};
+          const up = votes.up || 0;
+          const down = votes.down || 0;
+          const btns = card.querySelectorAll('.vote-btn span');
+          if (btns[0]) btns[0].textContent = up;
+          if (btns[1]) btns[1].textContent = down;
+          total += up + down;
+        });
+        document.getElementById('vote-count').textContent = total;
+      });
+    })();
 
     function shareScam(name) {
       const text = '⚠️ SCAM ALERT: ' + name + '\n\nExposed on scam.surf — protecting people from fraud.\n\nvia @SpunkArt13';
@@ -395,9 +422,14 @@
 
     function submitReport() {
       const text = document.getElementById('report-text').value.trim();
-      if (!text) return;
-      alert('Thank you! Your report has been submitted for review.');
-      document.getElementById('report-text').value = '';
+      if (!text) { alert('Please describe the scam.'); return; }
+      const ref = db.ref('scam/' + SITE_ID + '/reports/' + Date.now());
+      ref.set({text: text, time: Date.now()}).then(function() {
+        document.getElementById('report-text').value = '';
+        alert('Thank you! Your report has been submitted and will be reviewed.');
+      }).catch(function() {
+        alert('Error submitting. Please try again.');
+      });
     }
     // Referral tracking
     (function(){
